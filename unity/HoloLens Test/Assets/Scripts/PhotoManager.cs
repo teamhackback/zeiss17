@@ -29,7 +29,11 @@ public class PhotoManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-                count += 1;
+        count += 1;
+        if (PhotoCapture.SupportedResolutions.Count() == 0)
+        {
+            return;
+        }
 
                 if (count == 60) {
                         Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();

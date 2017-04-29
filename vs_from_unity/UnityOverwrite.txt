@@ -9,9 +9,9 @@ HoloLens Test.sln: modified
 GeneratedProjects\UWP\Assembly-CSharp\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
 GeneratedProjects\UWP\Assembly-CSharp-firstpass\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
 HoloLens Test\App.cs: B00ECE165D373E5F9A59CF7272C1ABC9
-HoloLens Test\HoloLens Test.csproj: D7AFEB02004845759E7A41D1FD7D2CFC
+HoloLens Test\HoloLens Test.csproj: 2C3DD42DBB84DE76C12C1A1C99AB8684
 HoloLens Test\HoloLens Test.csproj.user: modified
-HoloLens Test\Package.appxmanifest: FF6B3B20C01AE27077077F39CB7E9655
+HoloLens Test\Package.appxmanifest: 453540CD7D4A7F7B4B1FE3EC381A2C1A
 HoloLens Test\project.json: 1D02BC64BAC0D041019673A1C4C51737
 HoloLens Test\Assets\SplashScreen.scale-200.png: 60618416282ED104FD1473935716045D
 HoloLens Test\Assets\Square150x150Logo.scale-200.png: E02834B4A5DFB97FF8E212C1CACBB084

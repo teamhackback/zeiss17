@@ -27,4 +27,20 @@
       </uap:VisualElements>
     </Application>
   </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <uap:Capability Name="picturesLibrary" />
+    <Capability Name="privateNetworkClientServer" />
+    <uap2:Capability Name="spatialPerception" />
+    <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="microphone" />
+    <DeviceCapability Name="humaninterfacedevice">
+      <Device Id="any">
+        <Function Type="usage:0001 0004" />
+      </Device>
+      <Device Id="any">
+        <Function Type="usage:0001 0005" />
+      </Device>
+    </DeviceCapability>
+  </Capabilities>
 </Package>
