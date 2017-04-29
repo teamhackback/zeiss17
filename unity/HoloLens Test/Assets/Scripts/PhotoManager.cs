@@ -37,6 +37,9 @@ public class PhotoManager : MonoBehaviour {
 
                 if (count == 60) {
                         Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
+                        string filename = string.Format(@"CapturedImage{0}_n.jpg", Time.time);
+                        string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
+
 
                         // Create a PhotoCapture object
                         PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject) {
@@ -50,7 +53,15 @@ public class PhotoManager : MonoBehaviour {
                                 // Activate the camera
                                 photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result) {
                                         // Take a picture
-                                        photoCaptureObject.TakePhotoAsync(IdentifyLandmark);
+                                        //photoCaptureObject.TakePhotoAsync(IdentifyLandmark);
+                                        photoCaptureObject.TakePhotoAsync(filePath, PhotoCaptureFileOutputFormat.JPG, delegate(PhotoCapture.PhotoCaptureResult res) {
+                                                if (result.sucess) {
+                                                        Debug.Log("Saved Photo to disk!");
+                                                        photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
+                                                } else {
+                                                        Debug.Log("Failed to save Photo to disk");
+                                                }
+                                        });
                                 });
                         });
                         count = 0;
