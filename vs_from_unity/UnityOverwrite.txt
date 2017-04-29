@@ -5,10 +5,10 @@
 # Write a line equal to 'overwrite-all' (without quotes) to overwrite everything (preserved accross builds)
 # Write a line equal to 'keep-all' (without quotes) to keep files regardless their modification (preserved accross builds)
 # Default behavior is to never overwrite files
-HoloLens Test.sln: D75526491B645CB35ED80EE897DA596F
+HoloLens Test.sln: DF99AD4B695D828DCDB953F70EDB2400
 HoloLens Test\Package.appxmanifest: 3B049789992B9FD93D6837708BEA8B2A
 HoloLens Test\App.cs: B00ECE165D373E5F9A59CF7272C1ABC9
-HoloLens Test\HoloLens Test.csproj: BFC9A5BFC25CA1FDDE4DED64EC884B66
+HoloLens Test\HoloLens Test.csproj: 723325E021FD201B8F4195F829B30A3C
 HoloLens Test\HoloLens Test.csproj.user: BEFB8AC4886C4CFDD3C68445D6F19B04
 HoloLens Test\project.json: 1D02BC64BAC0D041019673A1C4C51737
 HoloLens Test\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
