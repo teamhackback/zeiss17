@@ -8,7 +8,7 @@ public class PhotoManager : MonoBehaviour {
         private int count = 0;
         private PhotoCapture photoCaptureObject = null;
         private bool changecolor = true;
-        private Texture targetTexture = null;
+        private Texture2D targetTexture = null;
 
 
         void IdentifyLandmark (PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
@@ -33,7 +33,7 @@ public class PhotoManager : MonoBehaviour {
 
                 if (count == 60) {
                         Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
-                        targetTexture = new Texture(cameraResolution.width, cameraResolution.height);
+                        targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
 
                         // Create a PhotoCapture object
                         PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject) {
