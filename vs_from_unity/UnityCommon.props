@@ -2,7 +2,7 @@
     <PropertyGroup>
         <UnityWSASolutionName>HoloLens Test</UnityWSASolutionName>
         <UnityWSASolutionDir>C:\Users\User\Documents\unity\vs_from_unity\</UnityWSASolutionDir>
-        <UnityProjectDir>\\VBOXSVR\unity\unity\HoloLens Test\</UnityProjectDir>
+        <UnityProjectDir>C:\Users\User\Documents\unity\HoloLens Test\</UnityProjectDir>
         <UnityWSAPlayerDir>C:\Program Files\Unity\Editor\Data\PlaybackEngines\MetroSupport\</UnityWSAPlayerDir>
         <UnityWSAToolsDir>$(UnityWSASolutionDir)Unity\Tools\</UnityWSAToolsDir>
     </PropertyGroup>
