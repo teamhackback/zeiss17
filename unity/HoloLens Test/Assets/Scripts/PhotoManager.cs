@@ -55,7 +55,7 @@ public class PhotoManager : MonoBehaviour {
                                         // Take a picture
                                         //photoCaptureObject.TakePhotoAsync(IdentifyLandmark);
                                         photoCaptureObject.TakePhotoAsync(filePath, PhotoCaptureFileOutputFormat.JPG, delegate(PhotoCapture.PhotoCaptureResult res) {
-                                                if (result.sucess) {
+                                                if (res.success) {
                                                         Debug.Log("Saved Photo to disk!");
                                                         photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
                                                 } else {
