@@ -8,24 +8,20 @@ public class PhotoManager : MonoBehaviour {
         private int count = 0;
         private PhotoCapture photoCaptureObject = null;
         private bool changecolor = true;
+        private Texture targetTexture = null;
 
 
         void IdentifyLandmark (PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
         {
                 if (result.success) {
-                        List<byte> imageBufferList = new List<byte>();
-                        // Copy the raw IMFMediaBuffer data into our empty byte list.
-                        photoCaptureFrame.CopyRawImageDataIntoBuffer(imageBufferList);
+                        photoCaptureFrame.UploadImageDataToTexture(targetTexture);
+                        //List<byte> imageBufferList = new List<byte>();
+                        //photoCaptureFrame.CopyRawImageDataIntoBuffer(imageBufferList);
 
+                        Renderer rend = gameObject.GetComponent<Renderer>() as Renderer;
+                        rend.material = new Material(Shader.Find("Custom/Unlit/UnlitTexture"));
+                        rend.material.SetTexture("_MainTex", targetTexture);
 
-                      
-                        if (changecolor) {
-                                gameObject.GetComponent<Renderer>().material.color = Color.red;
-                                changecolor = false;
-                        } else {
-                                changecolor = true;
-                                gameObject.GetComponent<Renderer>().material.color = Color.green;
-                        }
                         // TODO: Cognition API call
                 }
                 photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
@@ -37,9 +33,7 @@ public class PhotoManager : MonoBehaviour {
 
                 if (count == 60) {
                         Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
-                        string filename = string.Format(@"CapturedImage{0}_n.jpg", Time.time);
-                        string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
-
+                        targetTexture = new Texture(cameraResolution.width, cameraResolution.height);
 
                         // Create a PhotoCapture object
                         PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject) {
@@ -53,15 +47,7 @@ public class PhotoManager : MonoBehaviour {
                                 // Activate the camera
                                 photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result) {
                                         // Take a picture
-                                        //photoCaptureObject.TakePhotoAsync(IdentifyLandmark);
-                                        photoCaptureObject.TakePhotoAsync(filePath, PhotoCaptureFileOutputFormat.JPG, delegate(PhotoCapture.PhotoCaptureResult res) {
-                                                if (res.success) {
-                                                        Debug.Log("Saved Photo to disk!");
-                                                        photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
-                                                } else {
-                                                        Debug.Log("Failed to save Photo to disk");
-                                                }
-                                        });
+                                        photoCaptureObject.TakePhotoAsync(IdentifyLandmark);
                                 });
                         });
                         count = 0;
