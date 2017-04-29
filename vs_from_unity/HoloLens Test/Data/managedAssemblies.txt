@@ -1,3 +1,5 @@
 nunit.framework.dll
 UnityEngine.UI.dll
+UnityEngine.HoloLens.dll
 UnityEngine.Networking.dll
+UnityEngine.VR.dll
