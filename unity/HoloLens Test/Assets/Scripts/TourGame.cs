@@ -14,13 +14,14 @@ public class TourGame : MonoBehaviour
         txt.text = "F : " + currentscore;
         TextMesh txt2 = gameObject.AddComponent<TextMesh>();
         txt2.text = "Hallo";
-        txt2.transform.localPosition.Set(0, 0, 1);
+        txt2.characterSize = 1;
+        txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        txt.transform.localPosition.Set(0, 0, currentscore % 2);
+        txt.transform.position = new Vector3(1.94f, 1.26f + currentscore % 5 * 0.1f, 2.94f);
         txt.text = "F : " + currentscore;
         currentscore++;
     }
