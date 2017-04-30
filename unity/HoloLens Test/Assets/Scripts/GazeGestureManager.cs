@@ -17,8 +17,10 @@ public class GazeGestureManager : MonoBehaviour
 
         // Set up a GestureRecognizer to detect Select gestures.
         recognizer = new GestureRecognizer();
+        recognizer.SetRecognizableGestures(GestureSettings.Tap & GestureSettings.Hold);
         recognizer.TappedEvent += (source, tapCount, ray) =>
         {
+            Debug.Log("TappedEvent!");
             // Send an OnSelect message to the focused object and its ancestors.
             if (FocusedObject != null)
             {
@@ -29,6 +31,14 @@ public class GazeGestureManager : MonoBehaviour
             txt2.characterSize = 0.05f;
             txt2.fontSize = 100;
             txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
+        };
+        recognizer.ManipulationCompletedEvent += (source, second, third) =>
+        {
+            Debug.Log("ManipulationCompleted!");
+        };
+        recognizer.NavigationCompletedEvent += (source, second, third) =>
+        {
+            Debug.Log("NavigationCompleted!");
         };
         recognizer.StartCapturingGestures();
     }

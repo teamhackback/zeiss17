@@ -8,9 +8,10 @@ public class WorldCursor : MonoBehaviour
     void Start()
     {
         // Grab the mesh renderer that's on the same object as this script.
-        meshRenderer = this.gameObject.GetComponentInChildren<MeshRenderer>();
+        //meshRenderer = this.gameObject.GetComponentInChildren<MeshRenderer>();
     }
 
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +21,7 @@ public class WorldCursor : MonoBehaviour
         var gazeDirection = Camera.main.transform.forward;
 
         RaycastHit hitInfo;
+        return;
 
         if (Physics.Raycast(headPosition, gazeDirection, out hitInfo))
         {
@@ -39,4 +41,5 @@ public class WorldCursor : MonoBehaviour
             //meshRenderer.enabled = false;
         }
     }
+    */
 }

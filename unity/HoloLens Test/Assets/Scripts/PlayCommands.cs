@@ -1,0 +1,27 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.VR.WSA.Input;
+
+public class PlayCommands : MonoBehaviour {
+
+    SpriteRenderer btn;
+    int count;
+
+	// Use this for initialization
+	void Start () {
+		btn = gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    void OnSelect()
+    {
+            btn.transform.position = new Vector3(btn.transform.position.x, btn.transform.position.y + 3.0f, btn.transform.position.z);
+        
+    }
+
+    private void GestureRecognizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
+    {
+        btn.transform.position = new Vector3(btn.transform.position.x, btn.transform.position.y + 3.0f, btn.transform.position.z);
+    }
+}

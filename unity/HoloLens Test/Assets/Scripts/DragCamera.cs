@@ -12,7 +12,7 @@ public class DragCamera : MonoBehaviour
     public float outerRight = 10f;
 
 
-    void Update()
+    void LateUpdate()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
