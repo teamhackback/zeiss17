@@ -20,15 +20,13 @@ public class PhotoManager : MonoBehaviour {
 
         IEnumerator IdentifyLandmark (byte[] data)
         {
-                List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-                formData.Add( new MultipartFormDataSection(data) );
-
                 string requestParameters = "model=landmarks";
                 string uri = "https://westus.api.cognitive.microsoft.com/vision/v1.0/models/landmarks/analyze?" + requestParameters;
 
-                UnityWebRequest www = UnityWebRequest.Post(uri, formData);
+                UnityWebRequest www = UnityWebRequest.Post(uri, data);
                 www.SetRequestHeader("Ocp-Apim-Subscription-Key", "c293c74b91e94980be5a2108e63bdc0e");
-                yield return www.Send();
+                www.SetRequestHeader("Content-Type", "application/octet-stream");
+                yield return www;
 
                 string bla = www.ToString();
                 Debug.Log(bla);
@@ -49,16 +47,47 @@ public class PhotoManager : MonoBehaviour {
 
         }
 
-        void StartIdentification (PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
+        void OnCapturedPhotoToMemory(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
         {
-                if (result.success) {
+                if (result.success)
+                {
                         List<byte> imageBufferList = new List<byte>();
+                        // Copy the raw IMFMediaBuffer data into our empty byte list.
                         photoCaptureFrame.CopyRawImageDataIntoBuffer(imageBufferList);
 
+                        // Now we could do something with the array such as texture.SetPixels() or run image processing on the lis
                         StartCoroutine(IdentifyLandmark(imageBufferList.ToArray()));
                 }
                 photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
-        }	
+        }
+
+
+        void OnPhotoCaptureCreated(PhotoCapture captureObject)
+        {
+                photoCaptureObject = captureObject;
+
+                Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
+
+                CameraParameters c = new CameraParameters();
+                c.hologramOpacity = 0.0f;
+                c.cameraResolutionWidth = cameraResolution.width;
+                c.cameraResolutionHeight = cameraResolution.height;
+                c.pixelFormat = CapturePixelFormat.BGRA32;
+
+                captureObject.StartPhotoModeAsync(c, false, OnPhotoModeStarted);
+        }
+
+        private void OnPhotoModeStarted(PhotoCapture.PhotoCaptureResult result)
+        {
+                if (result.success)
+                {
+                        photoCaptureObject.TakePhotoAsync(OnCapturedPhotoToMemory);
+                }
+                else
+                {
+                        Debug.LogError("Unable to start photo mode!");
+                }
+        }
 
 	// Update is called once per frame
 	void Update () {
@@ -73,20 +102,7 @@ public class PhotoManager : MonoBehaviour {
                         targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
 
                         // Create a PhotoCapture object
-                        PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject) {
-                                photoCaptureObject = captureObject;
-                                CameraParameters cameraParameters = new CameraParameters();
-                                cameraParameters.hologramOpacity = 0.0f;
-                                cameraParameters.cameraResolutionWidth = cameraResolution.width;
-                                cameraParameters.cameraResolutionHeight = cameraResolution.height;
-                                cameraParameters.pixelFormat = CapturePixelFormat.BGRA32;
-
-                                // Activate the camera
-                                photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result) {
-                                        // Take a picture
-                                        photoCaptureObject.TakePhotoAsync(StartIdentification);
-                                });
-                        });
+                        PhotoCapture.CreateAsync(false, OnPhotoCaptureCreated);
                         count = 0;
                 }
 	}
