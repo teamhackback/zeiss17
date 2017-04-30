@@ -5,7 +5,7 @@
 # Write a line equal to 'overwrite-all' (without quotes) to overwrite everything (preserved accross builds)
 # Write a line equal to 'keep-all' (without quotes) to keep files regardless their modification (preserved accross builds)
 # Default behavior is to never overwrite files
-Triply.sln: AA14039C3FF7C82FF847EAADBE03988F
+Triply.sln: modified
 GeneratedProjects\UWP\Assembly-CSharp\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
 GeneratedProjects\UWP\Assembly-CSharp-firstpass\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
 HoloLens Test\App.cs: B00ECE165D373E5F9A59CF7272C1ABC9
@@ -29,13 +29,20 @@ HoloLens Test\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826
 Triply\App.cs: DC3A78D0C6026462B48DC9AABC36CA17
 Triply\Package.appxmanifest: 0380E6035F303000212229B3364847A5
 Triply\project.json: 1D02BC64BAC0D041019673A1C4C51737
-Triply\Triply.csproj: F2C05ED1E608A46E16E03FE4E17A4A12
-Triply\Triply.csproj.user: BEFB8AC4886C4CFDD3C68445D6F19B04
+Triply\Triply.csproj: 4CF477D89A4CE67BAB269F9934E4B70F
+Triply\Triply.csproj.user: modified
 Triply\Assets\SplashScreen.scale-200.png: 60618416282ED104FD1473935716045D
 Triply\Assets\Square150x150Logo.scale-200.png: E02834B4A5DFB97FF8E212C1CACBB084
 Triply\Assets\Square44x44Logo.scale-200.png: 6C6EF27184ABE9D870A9D564953775DE
 Triply\Assets\Square44x44Logo.targetsize-24_altform-unplated.png: 156637F7B5363E983E7A46D8E533A23D
 Triply\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
 Triply\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
+Triply\bin\x86\Debug\AppX\Assets\SplashScreen.scale-200.png: 60618416282ED104FD1473935716045D
+Triply\bin\x86\Debug\AppX\Assets\Square150x150Logo.scale-200.png: E02834B4A5DFB97FF8E212C1CACBB084
+Triply\bin\x86\Debug\AppX\Assets\Square44x44Logo.scale-200.png: 6C6EF27184ABE9D870A9D564953775DE
+Triply\bin\x86\Debug\AppX\Assets\Square44x44Logo.targetsize-24_altform-unplated.png: 156637F7B5363E983E7A46D8E533A23D
+Triply\bin\x86\Debug\AppX\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
+Triply\bin\x86\Debug\AppX\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
+Triply\bin\x86\Debug\AppX\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826
 Triply\Properties\AssemblyInfo.cs: 1026F2CF7507792241E8CD875E1A4D56
 Triply\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826

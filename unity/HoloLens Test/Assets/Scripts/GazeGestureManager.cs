@@ -17,7 +17,7 @@ public class GazeGestureManager : MonoBehaviour
 
         // Set up a GestureRecognizer to detect Select gestures.
         recognizer = new GestureRecognizer();
-        recognizer.SetRecognizableGestures(GestureSettings.Tap & GestureSettings.Hold);
+        recognizer.SetRecognizableGestures(GestureSettings.Tap | GestureSettings.Hold);
         recognizer.TappedEvent += (source, tapCount, ray) =>
         {
             Debug.Log("TappedEvent!");
@@ -26,19 +26,18 @@ public class GazeGestureManager : MonoBehaviour
             {
                 FocusedObject.SendMessageUpwards("OnSelect");
             }
-            TextMesh txt2 = gameObject.AddComponent<TextMesh>();
-            txt2.text = "Hallo";
-            txt2.characterSize = 0.05f;
-            txt2.fontSize = 100;
-            txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
+
         };
         recognizer.HoldStartedEvent += (source, ray) =>
         {
+            Debug.Log("HoldStarted!");
+            /*
             TextMesh txt2 = gameObject.AddComponent<TextMesh>();
             txt2.text = "Hallo";
             txt2.characterSize = 0.05f;
             txt2.fontSize = 100;
             txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
+            */
         };
         recognizer.ManipulationCompletedEvent += (source, second, third) =>
         {

@@ -28,7 +28,7 @@ public class PhotoManager : MonoBehaviour {
 
                 UnityWebRequest www = UnityWebRequest.Post(uri, formData);
                 www.SetRequestHeader("Ocp-Apim-Subscription-Key", "c293c74b91e94980be5a2108e63bdc0e");
-                yield return www.Send();
+                yield return www;
 
                 string bla = www.ToString();
                 Debug.Log(bla);
@@ -68,7 +68,7 @@ public class PhotoManager : MonoBehaviour {
                 return;
                 }
 
-                if (count == 400) {
+                if (count >= 4) {
                         Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
                         targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
 
@@ -89,6 +89,7 @@ public class PhotoManager : MonoBehaviour {
                         });
                         count = 0;
                 }
+                count++;
 	}
 
         void OnStoppedPhotoMode(PhotoCapture.PhotoCaptureResult result) {

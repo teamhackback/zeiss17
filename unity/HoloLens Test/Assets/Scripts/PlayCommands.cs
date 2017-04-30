@@ -19,9 +19,4 @@ public class PlayCommands : MonoBehaviour {
             btn.transform.position = new Vector3(btn.transform.position.x, btn.transform.position.y + 3.0f, btn.transform.position.z);
         
     }
-
-    private void GestureRecognizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
-    {
-        btn.transform.position = new Vector3(btn.transform.position.x, btn.transform.position.y + 3.0f, btn.transform.position.z);
-    }
 }
