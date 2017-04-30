@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-using Microsoft.ProjectOxford.Vision;
-using Microsoft.ProjectOxford.Vision.Contract;
 
 public class PhotoManager : MonoBehaviour {
         private int count = 0;
@@ -20,24 +18,38 @@ public class PhotoManager : MonoBehaviour {
                 private set;
         }
 
-        async void IdentifyLandmark (PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
+        IENumerator IdentifyLandmark (byte[] data)
+        {
+                List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+                formData.Add( new MultipartFormDataSection(data) );
+
+                string requestParameters = "model=landmarks";
+                string uri = "https://westus.api.cognitive.microsoft.com/vision/v1.0/models/landmarks/analyze?" + requestParameters;
+
+                UnityWebRequest www = UnityWebRequest.Post(uri, formData);
+                www.SetRequestHeader("Ocp-Apim-Subscription-Key", "c293c74b91e94980be5a2108e63bdc0e");
+                yield return www.Send();
+
+                if (www.isError) {
+                        gameObject.GetComponent<Renderer>().material.color = Color.red;
+                } else {
+                        gameObject.GetComponent<Renderer>().material.color = Color.green;
+                        TextMesh txt2 = gameObject.AddComponent<TextMesh>();
+                        txt2.text = www;
+                        txt2.characterSize = 0.05f;
+                        txt2.fontSize = 50;
+                        txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
+                }
+
+        }
+
+        void StartIdentification (PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
         {
                 if (result.success) {
                         List<byte> imageBufferList = new List<byte>();
                         photoCaptureFrame.CopyRawImageDataIntoBuffer(imageBufferList);
 
-                        VisionServiceClient visionServiceClient = new VisionServiceClient("c293c74b91e94980be5a2108e63bdc0e");
-
-                        using (Stream stream = new MemoryStream(imageBufferList.ToArray()))
-                        {
-                                AnalysisInDomainResult analysisResult = await visionServiceClient.AnalyzeImageInDomainAsync(stream, domainModel);
-                                return analysisResult;
-                        }
-                        //photoCaptureFrame.UploadImageDataToTexture(targetTexture);
-
-                        //Renderer rend = gameObject.GetComponent<Renderer>() as Renderer;
-                        //rend.material = new Material(Shader.Find("Custom/Unlit/UnlitTexture"));
-                        //rend.material.SetTexture("_MainTex", targetTexture);
+                        StartCoroutine(IdentifyLandmark(imageBufferList.ToArray()));
                 }
                 photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
         }	
@@ -50,7 +62,7 @@ public class PhotoManager : MonoBehaviour {
                 return;
                 }
 
-                if (count == 60) {
+                if (count == 400) {
                         Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
                         targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
 
