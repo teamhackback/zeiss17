@@ -12,10 +12,15 @@ public class TourGame : MonoBehaviour
     {
         txt = gameObject.transform.Find("Text").GetComponent<TextMesh>();
         txt.text = "F : " + currentscore;
+
         TextMesh txt2 = gameObject.AddComponent<TextMesh>();
-        txt2.text = "Hallo";
-        txt2.characterSize = 1;
-        txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
+
+        var headPosition = Camera.main.transform.position;
+        var gazeDirection = Camera.main.transform.forward;
+        txt2.text = "Marienplatz";
+        txt2.characterSize = 0.05f;
+        txt2.fontSize = 100;
+        txt2.transform.position = headPosition + gazeDirection * 2f; // two meters awaz from initial view
     }
 
     // Update is called once per frame

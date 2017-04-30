@@ -25,7 +25,7 @@ public class WorldCursor : MonoBehaviour
         {
             // If the raycast hit a hologram...
             // Display the cursor mesh.
-            meshRenderer.enabled = true;
+            //meshRenderer.enabled = true;
 
             // Move thecursor to the point where the raycast hit.
             this.transform.position = hitInfo.point;
@@ -36,7 +36,7 @@ public class WorldCursor : MonoBehaviour
         else
         {
             // If the raycast did not hit a hologram, hide the cursor mesh.
-            meshRenderer.enabled = false;
+            //meshRenderer.enabled = false;
         }
     }
 }
