@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+using Microsoft.ProjectOxford.Vision;
+using Microsoft.ProjectOxford.Vision.Contract;
+
 public class PhotoManager : MonoBehaviour {
         private int count = 0;
         private PhotoCapture photoCaptureObject = null;
@@ -11,29 +14,41 @@ public class PhotoManager : MonoBehaviour {
         private Texture2D targetTexture = null;
 
 
-        void IdentifyLandmark (PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
+        public int LandmarkName
+        {
+                get;
+                private set;
+        }
+
+        async void IdentifyLandmark (PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
         {
                 if (result.success) {
-                        photoCaptureFrame.UploadImageDataToTexture(targetTexture);
-                        //List<byte> imageBufferList = new List<byte>();
-                        //photoCaptureFrame.CopyRawImageDataIntoBuffer(imageBufferList);
+                        List<byte> imageBufferList = new List<byte>();
+                        photoCaptureFrame.CopyRawImageDataIntoBuffer(imageBufferList);
 
-                        Renderer rend = gameObject.GetComponent<Renderer>() as Renderer;
-                        rend.material = new Material(Shader.Find("Custom/Unlit/UnlitTexture"));
-                        rend.material.SetTexture("_MainTex", targetTexture);
+                        VisionServiceClient visionServiceClient = new VisionServiceClient("c293c74b91e94980be5a2108e63bdc0e");
 
-                        // TODO: Cognition API call
+                        using (Stream stream = new MemoryStream(imageBufferList.ToArray()))
+                        {
+                                AnalysisInDomainResult analysisResult = await visionServiceClient.AnalyzeImageInDomainAsync(stream, domainModel);
+                                return analysisResult;
+                        }
+                        //photoCaptureFrame.UploadImageDataToTexture(targetTexture);
+
+                        //Renderer rend = gameObject.GetComponent<Renderer>() as Renderer;
+                        //rend.material = new Material(Shader.Find("Custom/Unlit/UnlitTexture"));
+                        //rend.material.SetTexture("_MainTex", targetTexture);
                 }
                 photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
         }	
 
 	// Update is called once per frame
 	void Update () {
-        count += 1;
-        if (PhotoCapture.SupportedResolutions.Count() == 0)
-        {
-            return;
-        }
+                count++;
+                if (PhotoCapture.SupportedResolutions.Count() == 0)
+                {
+                return;
+                }
 
                 if (count == 60) {
                         Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
