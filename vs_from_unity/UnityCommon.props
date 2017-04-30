@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <UnityWSASolutionName>HoloLens Test</UnityWSASolutionName>
+        <UnityWSASolutionName>Triply</UnityWSASolutionName>
         <UnityWSASolutionDir>C:\Users\User\Documents\unity\vs_from_unity\</UnityWSASolutionDir>
         <UnityProjectDir>C:\Users\User\Documents\unity\HoloLens Test\</UnityProjectDir>
         <UnityWSAPlayerDir>C:\Program Files\Unity\Editor\Data\PlaybackEngines\MetroSupport\</UnityWSAPlayerDir>

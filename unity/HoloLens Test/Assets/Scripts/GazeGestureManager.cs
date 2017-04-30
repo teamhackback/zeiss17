@@ -32,6 +32,14 @@ public class GazeGestureManager : MonoBehaviour
             txt2.fontSize = 100;
             txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
         };
+        recognizer.HoldStartedEvent += (source, ray) =>
+        {
+            TextMesh txt2 = gameObject.AddComponent<TextMesh>();
+            txt2.text = "Hallo";
+            txt2.characterSize = 0.05f;
+            txt2.fontSize = 100;
+            txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
+        };
         recognizer.ManipulationCompletedEvent += (source, second, third) =>
         {
             Debug.Log("ManipulationCompleted!");

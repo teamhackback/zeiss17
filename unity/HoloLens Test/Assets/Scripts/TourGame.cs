@@ -7,6 +7,7 @@ public class TourGame : MonoBehaviour
     TextMesh txt;
     private int currentscore = 0;
 
+    /*
     // Use this for initialization
     void Start()
     {
@@ -30,4 +31,5 @@ public class TourGame : MonoBehaviour
         txt.text = "F : " + currentscore;
         currentscore++;
     }
+    */
 }

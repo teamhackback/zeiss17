@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using UnityEngine.Networking;
 
 public class PhotoManager : MonoBehaviour {
         private int count = 0;
@@ -18,7 +18,7 @@ public class PhotoManager : MonoBehaviour {
                 private set;
         }
 
-        IENumerator IdentifyLandmark (byte[] data)
+        IEnumerator IdentifyLandmark (byte[] data)
         {
                 List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
                 formData.Add( new MultipartFormDataSection(data) );
@@ -30,15 +30,21 @@ public class PhotoManager : MonoBehaviour {
                 www.SetRequestHeader("Ocp-Apim-Subscription-Key", "c293c74b91e94980be5a2108e63bdc0e");
                 yield return www.Send();
 
+                string bla = www.ToString();
+                Debug.Log(bla);
+
+
                 if (www.isError) {
                         gameObject.GetComponent<Renderer>().material.color = Color.red;
                 } else {
                         gameObject.GetComponent<Renderer>().material.color = Color.green;
+                        /*
                         TextMesh txt2 = gameObject.AddComponent<TextMesh>();
-                        txt2.text = www;
+                        txt2.text = www.ToString();
                         txt2.characterSize = 0.05f;
                         txt2.fontSize = 50;
                         txt2.transform.position = new Vector3(1.74f, 1.26f, 2.94f);
+                        */
                 }
 
         }
@@ -78,7 +84,7 @@ public class PhotoManager : MonoBehaviour {
                                 // Activate the camera
                                 photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result) {
                                         // Take a picture
-                                        photoCaptureObject.TakePhotoAsync(IdentifyLandmark);
+                                        photoCaptureObject.TakePhotoAsync(StartIdentification);
                                 });
                         });
                         count = 0;
