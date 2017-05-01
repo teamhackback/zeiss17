@@ -17,6 +17,6 @@ public class PlayCommands : MonoBehaviour {
     void OnSelect()
     {
             btn.transform.position = new Vector3(btn.transform.position.x, btn.transform.position.y + 3.0f, btn.transform.position.z);
-        
+        btn.enabled = false;
     }
 }

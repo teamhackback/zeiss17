@@ -14,6 +14,7 @@ public class CubeManager : MonoBehaviour, IInputClickHandler, IInputHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         btn.transform.position = new Vector3(btn.transform.position.x, btn.transform.position.y + 3.0f, btn.transform.position.z);
+        btn.enabled = false;
     }
     public void OnInputDown(InputEventData eventData)
     { }

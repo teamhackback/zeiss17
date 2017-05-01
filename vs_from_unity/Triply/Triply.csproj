@@ -221,12 +221,12 @@
 
   <ItemGroup>
     <ProjectReference Include="C:\Users\User\Documents\unity\vs_from_unity\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj">
-      <Project>{2d425883-6289-4f9a-99b7-60f2fdba0f5a}</Project>
+      <Project>{58ea41ae-6692-4c34-a64f-f3befe34d4e6}</Project>
       <Name>Assembly-CSharp</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="C:\Users\User\Documents\unity\vs_from_unity\GeneratedProjects\UWP\Assembly-CSharp-firstpass\Assembly-CSharp-firstpass.csproj">
-      <Project>{bd1de499-c17d-4d04-9391-1c7172a6b4c0}</Project>
+      <Project>{a5e1079f-a3e4-4859-8f10-4370b5270b4d}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
       <Private>False</Private>
     </ProjectReference>

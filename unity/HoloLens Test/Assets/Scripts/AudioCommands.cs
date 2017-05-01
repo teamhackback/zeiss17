@@ -8,7 +8,6 @@ public class AudioCommands : MonoBehaviour
 {
 
     SpriteRenderer btn;
-    int count;
 
     // Use this for initialization
     void Start()
@@ -19,6 +18,6 @@ public class AudioCommands : MonoBehaviour
     void OnSelect()
     {
         btn.transform.position = new Vector3(btn.transform.position.x, btn.transform.position.y + 3.0f, btn.transform.position.z);
-
+        btn.enabled = false;
     }
 }
